@@ -16,6 +16,38 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".HoofdMenuActivity"
+            android:label="HoofdMenuActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.baristapp.MainActivity" />
+        </activity>
+        <activity
+            android:name=".EigenLijstCocktailActivity"
+            android:label="EigenLijstCocktailActivity"
+            android:parentActivityName=".HoofdMenuActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.baristapp.HoofdMenuActivity"/>
+        </activity>
+        <activity
+            android:name=".LijstCocktailsActivity"
+            android:label="LijstCocktailsActivity"
+            android:parentActivityName=".HoofdMenuActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.baristapp.HoofdMenuActivity"/>
+        </activity>
+        <activity
+            android:name=".MakenCocktailActivity"
+            android:label="MakenCocktailActivity"
+            android:parentActivityName=".HoofdMenuActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.baristapp.HoofdMenuActivity"/>
+        </activity>
     </application>
 
 </manifest>

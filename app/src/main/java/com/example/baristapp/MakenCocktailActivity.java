@@ -1,0 +1,14 @@
+package com.example.baristapp;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+public class MakenCocktailActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_maken);
+    }
+}
