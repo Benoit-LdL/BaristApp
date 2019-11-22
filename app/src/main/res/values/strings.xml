@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">BaristApp</string>
     <string name="txt">The one and only BaristApp!</string>
+    <string name="lijst">Lijst van Cocktails</string>
+    <string name="eigen">Lijst van Eigen Cocktails</string>
+    <string name="maken">Maak een Cocktail</string>
 </resources>
