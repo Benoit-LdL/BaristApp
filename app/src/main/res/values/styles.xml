@@ -6,22 +6,18 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
     </style>
 
-    <style name="LdL_Blue_Theme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Benoit's theme -->
-        <item name="colorPrimary">@color/Sapphire_LdL</item>
-        <item name="colorPrimaryDark">@color/Lapis_LdL</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
-    <!-- Custom Animations for whole app (referenced in 'apptheme' theme) -->
-    <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
-        <item   name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
-        <item   name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
-        <item   name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
-        <item   name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ToolbarColoredBackArrow" parent="AppTheme">
+        <item name="android:textColorSecondary">@android:color/black</item>
     </style>
 </resources>

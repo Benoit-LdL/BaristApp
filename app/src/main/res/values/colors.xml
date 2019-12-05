@@ -5,4 +5,6 @@
     <color name="colorAccent">#D81B60</color>
     <color name="Lapis_LdL">#26619C</color>
     <color name="Sapphire_LdL">#0f52ba</color>
+    <color name="backgroud_color">#F5F5F5</color>
+    <color name="overlay_color">#55333639</color>
 </resources>
