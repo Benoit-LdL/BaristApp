@@ -1,7 +1,9 @@
 package com.example.baristapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.baristapp.PersonalList.PersonalList_MainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -22,6 +24,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.Button;
+import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -29,8 +33,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private NavController navController;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -78,6 +87,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_menu:
                 navController.navigate(R.id.nav_menu);
                 break;
+            //benoit
+            case R.id.nav_slideshow:
+                Toast.makeText(this, "clicked on slideshow", Toast.LENGTH_SHORT).show();
+                Intent newIntent = new Intent(HomeActivity.this, PersonalList_MainActivity.class);
+                finish();
+                startActivity(newIntent);
+                break;
+            //------------------
         }
         return true;
     }
