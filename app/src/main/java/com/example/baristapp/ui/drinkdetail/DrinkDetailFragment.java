@@ -1,4 +1,4 @@
-package com.example.baristapp.ui.tools;
+package com.example.baristapp.ui.drinkdetail;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,22 +14,19 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.baristapp.R;
 
-public class ToolsFragment extends Fragment {
+public class DrinkDetailFragment extends Fragment {
 
-    private ToolsViewModel toolsViewModel;
+    private DrinkDetailViewModel toolsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         toolsViewModel =
-                ViewModelProviders.of(this).get(ToolsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_tools, container, false);
-        final TextView textView = root.findViewById(R.id.text_tools);
-        toolsViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+                ViewModelProviders.of(this).get(DrinkDetailViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_drink_detail, container, false);
+
+        //toolsViewModel.getText().observe(this, new Observer<String>() {
+
+        //});
         return root;
     }
 }
