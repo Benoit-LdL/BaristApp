@@ -38,10 +38,8 @@ public class MenuFragment extends Fragment {
     LayoutAnimationController layoutAnimationController;
     MyCategoriesAdapter adapter;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        menuViewModel =
-                ViewModelProviders.of(this).get(MenuViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        menuViewModel = ViewModelProviders.of(this).get(MenuViewModel.class);
         View root = inflater.inflate(R.layout.fragment_menu, container, false);
         unbinder = ButterKnife.bind(this,root);
         initViews();

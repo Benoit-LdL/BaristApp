@@ -1,12 +1,12 @@
 package com.example.baristapp.Adapter;
 
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,8 +27,8 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class MyDrinkListAdapter extends RecyclerView.Adapter<MyDrinkListAdapter.MyViewHolder>{
-    private Context context;
-    private List<DrinkModel> drinkModelList;
+    Context context;
+    List<DrinkModel> drinkModelList;
 
     public MyDrinkListAdapter(Context context, List<DrinkModel> drinkModelList) {
         this.context = context;
@@ -38,17 +38,13 @@ public class MyDrinkListAdapter extends RecyclerView.Adapter<MyDrinkListAdapter.
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(context)
-                .inflate(R.layout.layout_drink_item,parent,false));
+        return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_drink_item,parent,false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Glide.with(context).load(drinkModelList.get(position).getImage()).into(holder.img_drink_image);
-        holder.txt_drink_name.setText(new StringBuilder("")
-                .append(drinkModelList.get(position).getName()));
-
-
+        holder.txt_drink_name.setText(new StringBuilder("").append(drinkModelList.get(position).getName()));
 
         holder.setListener((view, pos) -> {
             Common.selectedDrink = drinkModelList.get(pos);
@@ -62,13 +58,11 @@ public class MyDrinkListAdapter extends RecyclerView.Adapter<MyDrinkListAdapter.
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private Unbinder unbinder;
+        Unbinder unbinder;
         @BindView(R.id.txt_drink_name)
         TextView txt_drink_name;
         @BindView(R.id.img_drink_image)
         ImageView img_drink_image;
-        @BindView(R.id.img_fav)
-        ImageView img_fav;
 
         IRecyclerClickListener listener;
 

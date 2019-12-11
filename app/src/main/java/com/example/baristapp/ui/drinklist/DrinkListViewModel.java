@@ -18,9 +18,11 @@ public class DrinkListViewModel extends ViewModel {
     }
 
     public MutableLiveData<List<DrinkModel>> getMutableLiveDataDrinkList() {
-        if (mutableLiveDataDrinkList ==  null)
+        if (mutableLiveDataDrinkList ==  null) {
             mutableLiveDataDrinkList = new MutableLiveData<>();
+        }
         mutableLiveDataDrinkList.setValue(Common.categorySelected.getDrinks());
         return mutableLiveDataDrinkList;
     }
+
 }

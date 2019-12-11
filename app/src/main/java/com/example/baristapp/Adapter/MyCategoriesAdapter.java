@@ -27,7 +27,6 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class MyCategoriesAdapter extends RecyclerView.Adapter<MyCategoriesAdapter.MyViewHolder> {
-
    Context context;
    List<CategoryModel> categoryModelList;
 
@@ -78,8 +77,9 @@ public class MyCategoriesAdapter extends RecyclerView.Adapter<MyCategoriesAdapte
         }
 
         @Override
-        public void onClick(View view) {
-         listener.onItemClickListener(view, getAdapterPosition());
+        public void onClick(View view)
+        {
+            listener.onItemClickListener(view, getAdapterPosition());
         }
     }
 
