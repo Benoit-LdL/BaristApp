@@ -88,7 +88,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_slideshow:
                 Toast.makeText(this, "clicked on slideshow", Toast.LENGTH_SHORT).show();
                 Intent newIntent = new Intent(HomeActivity.this, PersonalList_MainActivity.class);
-                finish();
                 startActivity(newIntent);
                 break;
             //------------------

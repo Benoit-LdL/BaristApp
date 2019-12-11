@@ -38,7 +38,7 @@ public class PersonalList_MainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.personal_list_main_activity);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         notesList = findViewById(R.id.main_cocktail_list);
 
         gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
