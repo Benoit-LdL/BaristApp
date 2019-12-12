@@ -24,10 +24,10 @@
         tools:layout="@layout/fragment_slideshow" />
 
     <fragment
-        android:id="@+id/nav_tools"
-        android:name="com.example.baristapp.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
+        android:id="@+id/nav_drink_detail"
+        android:name="com.example.baristapp.ui.drinkdetail.DrinkDetailFragment"
+        android:label="@string/menu_drink_detail"
+        tools:layout="@layout/fragment_drink_detail" />
 
     <fragment
         android:id="@+id/nav_share"
@@ -36,8 +36,8 @@
         tools:layout="@layout/fragment_share" />
 
     <fragment
-        android:id="@+id/nav_send"
-        android:name="com.example.baristapp.ui.send.SendFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
+        android:id="@+id/nav_drink_list"
+        android:name="com.example.baristapp.ui.drinklist.DrinkListFragment"
+        android:label="@string/menu_drink_list"
+        tools:layout="@layout/fragment_drink_list" />
 </navigation>

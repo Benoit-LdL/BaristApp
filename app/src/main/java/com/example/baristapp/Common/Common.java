@@ -1,5 +1,7 @@
 package com.example.baristapp.Common;
 
+import com.example.baristapp.Model.CategoryModel;
+import com.example.baristapp.Model.DrinkModel;
 import com.example.baristapp.Model.UserModel;
 
 public class Common {
@@ -10,4 +12,6 @@ public class Common {
     public static final String BEST_DEALS_REF = "BestDeals";
     public static final int DEFAULT_COLUMN_COUNT =0;
     public static final String CATEGORY_REF = "Category";
+    public static CategoryModel categorySelected;
+    public static DrinkModel selectedDrink;
 }
