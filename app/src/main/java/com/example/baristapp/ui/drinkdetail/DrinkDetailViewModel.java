@@ -4,16 +4,23 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.baristapp.Common.Common;
+import com.example.baristapp.Model.DrinkModel;
+
 public class DrinkDetailViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private MutableLiveData<DrinkModel> mutableLiveDataDrink;
 
     public DrinkDetailViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is tools fragment");
+
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public MutableLiveData<DrinkModel> getMutableLiveDataDrink()
+    {
+        if (mutableLiveDataDrink == null){
+            mutableLiveDataDrink = new MutableLiveData<>();
+        }
+        mutableLiveDataDrink.setValue(Common.selectedDrink);
+        return mutableLiveDataDrink;
     }
 }
