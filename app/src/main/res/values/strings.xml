@@ -23,4 +23,5 @@
     <string name="menu_menu">Categories</string>
     <string name="menu_drink_list">Drink List</string>
     <string name="menu_drink_detail">Drink Detail</string>
+    <string name="sign_out">Sign out</string>
 </resources>
