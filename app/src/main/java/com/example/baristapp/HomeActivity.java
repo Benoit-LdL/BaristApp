@@ -1,8 +1,10 @@
 package com.example.baristapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.baristapp.Common.Common;
 import com.example.baristapp.EventBus.CategoryClick;
 import com.example.baristapp.EventBus.DrinkItemClick;
 import com.example.baristapp.PersonalList.PersonalList_MainActivity;
@@ -13,12 +15,15 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -64,6 +69,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         NavigationUI.setupWithNavController(navigationView, navController);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.bringToFront();
+
+
+
     }
 
     @Override
@@ -96,9 +104,34 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 Intent newIntent = new Intent(HomeActivity.this, PersonalList_MainActivity.class);
                 startActivity(newIntent);
                 break;
+            case R.id.nav_sign_out:
+                signOut();
+                break;
+
             //------------------
         }
         return true;
+    }
+
+    private void signOut() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Signout")
+                .setMessage("Do you really want to sign out?")
+                .setNegativeButton("Cancel", (dialog, which) ->
+                        dialog.dismiss())
+                .setPositiveButton("Ok", (dialog, which) -> {
+                    Common.selectedDrink = null;
+                    Common.categorySelected = null;
+                    Common.currentUser = null;
+                    FirebaseAuth.getInstance().signOut();
+
+                    Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override
