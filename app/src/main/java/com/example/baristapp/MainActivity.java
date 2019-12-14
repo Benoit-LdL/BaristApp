@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     private List<AuthUI .IdpConfig> providers;
 
+
     private static final String LOG = MainActivity.class.getSimpleName();
 
     @Override
