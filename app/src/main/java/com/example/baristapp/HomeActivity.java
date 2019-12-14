@@ -5,8 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.baristapp.Common.Common;
+import com.example.baristapp.EventBus.BestDealItemClick;
 import com.example.baristapp.EventBus.CategoryClick;
 import com.example.baristapp.EventBus.DrinkItemClick;
+import com.example.baristapp.EventBus.PopularCategoryClick;
+import com.example.baristapp.Model.CategoryModel;
+import com.example.baristapp.Model.DrinkModel;
 import com.example.baristapp.PersonalList.PersonalList_MainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -23,7 +27,10 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -38,12 +45,14 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import dmax.dialog.SpotsDialog;
+
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private AppBarConfiguration mAppBarConfiguration;
     private DrawerLayout drawer;
     private NavController navController;
-
+    android.app.AlertDialog dialog;
 
 
     @Override
@@ -53,6 +62,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        dialog = new SpotsDialog.Builder().setContext(this).setCancelable(false).build();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
@@ -162,6 +172,136 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if (event.isSuccess())
         {
             navController.navigate(R.id.nav_drink_detail);
+        }
+    }
+
+    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
+    public void onPopularItemClick(PopularCategoryClick event)
+    {
+        if (event.getPopularCategoryModel() != null)
+        {
+            dialog.show();
+            FirebaseDatabase.getInstance()
+                    .getReference("Category")
+                    .child(event.getPopularCategoryModel().getMenu_id())
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                           if (dataSnapshot.exists())
+                           {
+                               Common.categorySelected = dataSnapshot.getValue(CategoryModel.class);
+
+                               FirebaseDatabase.getInstance()
+                                       .getReference("Category")
+                                       .child(event.getPopularCategoryModel().getMenu_id())
+                                       .child("drinks")
+                                       .orderByChild("id")
+                                       .equalTo(event.getPopularCategoryModel().getDrink_id())
+                                       .limitToLast(1)
+                                       .addListenerForSingleValueEvent(new ValueEventListener() {
+                                           @Override
+                                           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                if (dataSnapshot.exists())
+                                                {
+                                                    for (DataSnapshot itemSnapShot:dataSnapshot.getChildren())
+                                                    {
+                                                        Common.selectedDrink= itemSnapShot.getValue(DrinkModel.class);
+                                                    }
+                                                    navController.navigate(R.id.nav_drink_detail);
+                                                }else
+                                                    {
+
+                                                        Toast.makeText(HomeActivity.this, "Drink does not exists", Toast.LENGTH_SHORT).show();
+
+                                                    }
+                                               dialog.dismiss();
+                                           }
+
+                                           @Override
+                                           public void onCancelled(@NonNull DatabaseError databaseError) {
+                                               dialog.dismiss();
+                                               Toast.makeText(HomeActivity.this, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                                           }
+                                       });
+                           }else
+                               {
+                                   dialog.dismiss();
+                                   Toast.makeText(HomeActivity.this, "Drink does not exists", Toast.LENGTH_SHORT).show();
+                               }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            dialog.dismiss();
+                            Toast.makeText(HomeActivity.this, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
+
+
+
+    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
+    public void onBestDealItemClick(BestDealItemClick event)
+    {
+        if (event.getBestDealModel() != null)
+        {
+            dialog.show();
+            FirebaseDatabase.getInstance()
+                    .getReference("Category")
+                    .child(event.getBestDealModel().getMenu_id())
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists())
+                            {
+                                Common.categorySelected = dataSnapshot.getValue(CategoryModel.class);
+
+                                FirebaseDatabase.getInstance()
+                                        .getReference("Category")
+                                        .child(event.getBestDealModel().getMenu_id())
+                                        .child("drinks")
+                                        .orderByChild("id")
+                                        .equalTo(event.getBestDealModel().getDrink_id())
+                                        .limitToLast(1)
+                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                if (dataSnapshot.exists())
+                                                {
+                                                    for (DataSnapshot itemSnapShot:dataSnapshot.getChildren())
+                                                    {
+                                                        Common.selectedDrink= itemSnapShot.getValue(DrinkModel.class);
+                                                    }
+                                                    navController.navigate(R.id.nav_drink_detail);
+                                                }else
+                                                {
+
+                                                    Toast.makeText(HomeActivity.this, "Drink does not exists", Toast.LENGTH_SHORT).show();
+
+                                                }
+                                                dialog.dismiss();
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                dialog.dismiss();
+                                                Toast.makeText(HomeActivity.this, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            }else
+                            {
+                                dialog.dismiss();
+                                Toast.makeText(HomeActivity.this, "Drink does not exists", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            dialog.dismiss();
+                            Toast.makeText(HomeActivity.this, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
         }
     }
 }
