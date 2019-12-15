@@ -27,29 +27,31 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.List;
+
 public class PersonalList_MainActivity extends AppCompatActivity {
 
     private FirebaseAuth fAuth;
-    private RecyclerView notesList;
+    private RecyclerView cocktailsList;
     private GridLayoutManager gridLayoutManager;
-    private DatabaseReference notesDB;
+    private DatabaseReference cocktailsDB;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.personal_list_main_activity);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        notesList = findViewById(R.id.main_cocktail_list);
+        cocktailsList = findViewById(R.id.main_cocktail_list);
 
         gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
 
-        notesList.setHasFixedSize(true);
-        notesList.setLayoutManager(gridLayoutManager);
-        notesList.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        cocktailsList.setHasFixedSize(true);
+        cocktailsList.setLayoutManager(gridLayoutManager);
+        cocktailsList.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
 
         fAuth = FirebaseAuth.getInstance();
         if (fAuth.getCurrentUser() != null)
-            notesDB = FirebaseDatabase.getInstance().getReference().child("PersonalList").child(fAuth.getCurrentUser().getUid());
+            cocktailsDB = FirebaseDatabase.getInstance().getReference().child("PersonalList").child(fAuth.getCurrentUser().getUid());
         updateUI();
         loadData();
     }
@@ -61,7 +63,7 @@ public class PersonalList_MainActivity extends AppCompatActivity {
 
     private void loadData()
     {
-        Query query = notesDB.orderByValue();
+        Query query = cocktailsDB.orderByValue();
         FirebaseRecyclerOptions<CocktailModel> options = new FirebaseRecyclerOptions.Builder<CocktailModel>()
                 .setQuery(query, CocktailModel.class)
                 .setLifecycleOwner(this)
@@ -83,7 +85,7 @@ public class PersonalList_MainActivity extends AppCompatActivity {
                             @NonNull CocktailModel model)
                     {
                         final String noteId = getRef(position).getKey();
-                        notesDB.child(noteId).addValueEventListener(new ValueEventListener() {
+                        cocktailsDB.child(noteId).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.hasChild("name") && dataSnapshot.hasChild("category")&& dataSnapshot.hasChild("timestamp"))
@@ -98,7 +100,7 @@ public class PersonalList_MainActivity extends AppCompatActivity {
                                     GetTime getTime = new GetTime();
                                     viewHolder.setCocktailTime(getTime.getTime(Long.parseLong(timestamp),getApplicationContext()));
 
-                                    viewHolder.noteCard.setOnClickListener(new View.OnClickListener() {
+                                    viewHolder.CocktailCard.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
                                             Intent intent = new Intent(PersonalList_MainActivity.this, PersonalList_NewCocktailActivity.class);
@@ -113,7 +115,7 @@ public class PersonalList_MainActivity extends AppCompatActivity {
                         });
                     }
                 };
-        notesList.setAdapter(firebaseRecyclerAdapter);
+        cocktailsList.setAdapter(firebaseRecyclerAdapter);
     }
 
     private void updateUI()

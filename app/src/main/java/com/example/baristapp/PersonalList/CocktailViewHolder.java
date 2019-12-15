@@ -13,14 +13,14 @@ public class CocktailViewHolder extends RecyclerView.ViewHolder {
 
     View view;
     TextView textName,textCategory, textTime;
-    CardView noteCard;
+    CardView CocktailCard;
 
     public CocktailViewHolder(@NonNull View itemView) {
         super(itemView);
         textName = itemView.findViewById(R.id.cocktail_name);
         textCategory = itemView.findViewById(R.id.cocktail_category);
         textTime = itemView.findViewById(R.id.cocktail_time);
-        noteCard = itemView.findViewById(R.id.cocktail_card);
+        CocktailCard = itemView.findViewById(R.id.cocktail_card);
     }
 
     public void setCocktailname(String name) {

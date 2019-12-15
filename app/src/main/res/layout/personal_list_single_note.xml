@@ -32,8 +32,16 @@
                 android:ellipsize="end"
                 android:textColor="@android:color/black"
                 android:layout_weight="1"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:gravity="center">
             </TextView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/black"
+                android:alpha=".3"/>
+
             <TextView
                 android:id="@+id/cocktail_category"
                 android:layout_width="156dp"
@@ -44,8 +52,17 @@
                 android:ellipsize="end"
                 android:textColor="@android:color/black"
                 android:layout_weight="1"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                >
             </TextView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/black"
+                android:alpha=".3"/>
+
             <TextView
                 android:id="@+id/cocktail_time"
                 android:layout_width="match_parent"
@@ -53,7 +70,8 @@
                 android:textSize="18sp"
                 android:maxLines="1"
                 android:ellipsize="end"
-                android:text="Updated time">
+                android:text="Updated time"
+                android:gravity="center">
             </TextView>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

@@ -155,7 +155,7 @@ public class PersonalList_NewCocktailActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful())
-                                    Toast.makeText(PersonalList_NewCocktailActivity.this, "Note added to Database", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PersonalList_NewCocktailActivity.this, "Cocktail added to Database", Toast.LENGTH_SHORT).show();
                                 else
                                     Toast.makeText(PersonalList_NewCocktailActivity.this, "ERROR: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }

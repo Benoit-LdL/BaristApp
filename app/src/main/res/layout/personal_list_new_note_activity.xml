@@ -14,10 +14,17 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/new_cocktail_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme" />
+            android:theme="?attr/actionBarTheme"
+            android:backgroundTint="@color/fui_transparent"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black"
+            android:alpha=".3"/>
 
         <EditText
             android:id="@+id/new_cocktail_name"
@@ -25,15 +32,23 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:hint="Type your cocktail's name here..."
-            android:padding="10dp" />
+            android:padding="10dp"
+            android:textAlignment="center"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black"
+            android:alpha=".3"/>
 
         <EditText
             android:id="@+id/new_cocktail_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:hint="category: Whisky,Rhum,Gin,Vodka,etc"
-            android:padding="10dp" />
+            android:hint="category"
+            android:padding="10dp"
+            android:textAlignment="center"/>
 
         <View
             android:layout_width="match_parent"
@@ -44,19 +59,32 @@
         <EditText
             android:id="@+id/new_cocktail_ingredients"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:ems="10"
             android:gravity="top"
-            android:hint="Type your ingredients: \n -First ingredient \n -Second ingredient \n -..."
+            android:hint="Type your ingredients:"
             android:inputType="textMultiLine"
-            android:padding="10dp" />
+            android:padding="10dp"
+            android:textAlignment="center"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/black"
+            android:alpha=".3"/>
 
         <Button
             android:id="@+id/btn_createCocktail"
-            android:layout_width="match_parent"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
-            android:text="Create this cocktail!" />
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="Create this cocktail!"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/custom_button"/>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
